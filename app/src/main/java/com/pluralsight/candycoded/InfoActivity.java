@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -26,16 +27,17 @@ public class InfoActivity extends AppCompatActivity {
 
     // ***
     // TODO - Task 2 - Launch the Google Maps Activity
-    private void launchGoogleMaps(){
-        Uri gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988");
+    public void createMapIntent(View view){
+        Uri candyStoreIntentUri = Uri.parse("geo:0,0?q=618 E South St Orlando, FL 32801");
 
         // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, candyStoreIntentUri);
         // Make the Intent explicit by setting the Google Maps package
         mapIntent.setPackage("com.google.android.apps.maps");
 
-        // Attempt to start an activity that can handle the Intent
-        startActivity(mapIntent);
+        if(mapIntent.resolveActivity(getPackageManager()) != null){
+            startActivity(mapIntent);
+        }
     }
     // ***
 
